@@ -1,4 +1,4 @@
-package com.centraleNantes.poei2;
+package com.centraleNantes.poei2.boris;
 
 import java.util.Scanner;
 
