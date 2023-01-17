@@ -1,8 +1,7 @@
-package com.centraleNantes.poei2.boris;
+package com.centraleNantes.poei2.boris.aIntro;
 
-import com.centraleNantes.poei2.boris.exceptions.WeekDayException;
+import com.centraleNantes.poei2.boris.aIntro.exceptions.WeekDayException;
 
-import javax.management.RuntimeErrorException;
 import java.time.LocalDate;
 import java.util.Scanner;
 

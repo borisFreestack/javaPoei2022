@@ -1,4 +1,4 @@
-package com.centraleNantes.poei2.boris.exceptions;
+package com.centraleNantes.poei2.boris.aIntro.exceptions;
 
 /**
  *
