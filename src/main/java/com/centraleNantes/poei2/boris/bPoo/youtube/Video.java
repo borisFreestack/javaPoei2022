@@ -11,7 +11,14 @@ public class Video {
 	private User creator;
 	private List<Like> likeList;
 
+	public static int getCounter() {
+		return counter;
+	}
+
+	private static int counter;
+
 	public Video(){
+		counter++;
 	}
 
 	public Video(String url, String title, int duration, LocalDate publicationDate, User creator, List<Like> likeList) {
@@ -21,6 +28,7 @@ public class Video {
 		this.publicationDate = publicationDate;
 		this.creator = creator;
 		this.likeList = likeList;
+		counter++;
 	}
 
 	public User getCreator() {
