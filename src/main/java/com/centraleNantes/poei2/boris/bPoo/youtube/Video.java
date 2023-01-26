@@ -2,6 +2,7 @@ package com.centraleNantes.poei2.boris.bPoo.youtube;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 
 public class Video {
 	private String url;
@@ -19,6 +20,10 @@ public class Video {
 
 	public Video(){
 		counter++;
+	}
+
+	public Video(String title){
+		this.title = title;
 	}
 
 	public Video(String url, String title, int duration, LocalDate publicationDate, User creator, List<Like> likeList) {
@@ -79,4 +84,24 @@ public class Video {
 	public void setPublicationDate(LocalDate publicationDate) {
 		this.publicationDate = publicationDate;
 	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		Video video = (Video) o;
+		return duration == video.duration && Objects.equals(url, video.url) && Objects.equals(
+		title,
+		video.title
+		) && Objects.equals(publicationDate, video.publicationDate) && Objects.equals(
+		creator,
+		video.creator
+		) && Objects.equals(likeList, video.likeList);
+	}
+
+
 }

@@ -6,6 +6,7 @@ import java.util.List;
 public class User {
 	private String pseudo;
 	private LocalDate birthdate;
+	private String password;
 
 	private List<Video> videoCreatedList;
 
@@ -37,7 +38,7 @@ public class User {
 		this.likeByUserList = likeByUserList;
 	}
 
-	public String getPseudo() {
+	public String getName() {
 		return pseudo;
 	}
 
@@ -51,5 +52,17 @@ public class User {
 
 	public void setBirthdate(LocalDate birthdate) {
 		this.birthdate = birthdate;
+	}
+
+	public String getPseudo() {
+		return pseudo;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 }
