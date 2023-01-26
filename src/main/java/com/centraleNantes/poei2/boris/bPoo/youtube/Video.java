@@ -103,5 +103,8 @@ public class Video {
 		) && Objects.equals(likeList, video.likeList);
 	}
 
-
+	@Override
+	public int hashCode() {
+		return Objects.hash(title);
+	}
 }

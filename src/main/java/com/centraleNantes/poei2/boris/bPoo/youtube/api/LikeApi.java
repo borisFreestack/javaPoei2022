@@ -17,6 +17,11 @@ public class LikeApi {
 		if(!likesByVideo.containsKey(video)){
 			likesByVideo.put(video, new ArrayList<Like>());
 		}
+		for(Like like : likesByVideo.get(video)){
+			if(like.getUserLiking().equals(user)){
+				return;
+			}
+		}
 		likesByVideo.get(video).add(new Like(video, user));
 	}
 	public static void dislike(User user, Video video) {
