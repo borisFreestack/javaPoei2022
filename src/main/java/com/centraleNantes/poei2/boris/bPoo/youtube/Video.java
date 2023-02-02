@@ -11,6 +11,7 @@ public class Video {
 	private LocalDate publicationDate;
 	private User creator;
 	private List<Like> likeList;
+	private List<CategoryEnum> categories;
 
 	public static int getCounter() {
 		return counter;
@@ -83,6 +84,14 @@ public class Video {
 
 	public void setPublicationDate(LocalDate publicationDate) {
 		this.publicationDate = publicationDate;
+	}
+
+	public List<CategoryEnum> getCategories() {
+		return categories;
+	}
+
+	public void setCategories(List<CategoryEnum> categories) {
+		this.categories = categories;
 	}
 
 	@Override

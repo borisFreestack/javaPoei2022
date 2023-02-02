@@ -1,6 +1,7 @@
 package com.centraleNantes.poei2.boris.bPoo.youtube.api;
 
 
+import com.centraleNantes.poei2.boris.bPoo.youtube.Channel;
 import com.centraleNantes.poei2.boris.bPoo.youtube.Like;
 import com.centraleNantes.poei2.boris.bPoo.youtube.User;
 import com.centraleNantes.poei2.boris.bPoo.youtube.Video;
@@ -62,6 +63,20 @@ public class Main {
             LikeApi.dislike(userLogged, aVideo);
 
             System.out.println(LikeApi.list(aVideo).size() + " likes");
+
+            Channel channel = ChannelStartApi.createChannel(user, "channelName");
+            System.out.println(channel.getChannelName());
+
+
+            ChannelStartApi.upload(channel.getChannelName(), bVideo);
+            ChannelStartApi.upload(channel.getChannelName(), aVideo);
+
+            ChannelStartApi.subscribe(channel, user);
+            ChannelStartApi.subscribe(channel, userb);
+
+            List<Video> videosRecommended = ChannelStartApi.findRecommendations(userb);
+            System.out.println("Liste des recommandations: ");
+            videosRecommended.forEach(video-> System.out.println(video.getTitle()));
 
         } catch (LoginException e) {
             System.out.println(e.getMessage());

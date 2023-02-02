@@ -1,8 +1,11 @@
 package com.centraleNantes.poei2.boris.cCollection;
 
 import java.util.*;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
-public class Main {
+public class MainStreamCorrection {
 
 
 	public static void main(String[] args) {
@@ -23,78 +26,52 @@ public class Main {
 		exercice1(words);
 		exercice2(words);
 		exercice3(words);
-		exercice3bis(words);
 		exercice4(words);
-		exercice5(words);
-		exercice6(words);
+		//exercice5(words);
 
 	}
-
-
 
 
 	public static void exercice1(List<String> words) {
 		System.out.println("Exercice 1");
 		words.sort(Comparator.naturalOrder());
-		for (String word : words) {
-			System.out.println(word);
-		}
-
+		words.forEach(toto-> System.out.println(toto));
 	}
+
+	public static Consumer<String> printWord = (String word) -> System.out.println(word);
 
 	public static void exercice2(List<String> words) {
 		System.out.println("Exercice 2");
-		ArrayList<String> filteredWords = new ArrayList<>();
-		for (String word : words) {
-			if (word.length() >= 2) {
-				filteredWords.add(word);
-			}
-		}
-		for (String word : filteredWords) {
-			System.out.println(word);
-		}
-
+		words.stream()
+		.filter(word-> word.length()>=2)
+		.forEach(printWord);
 	}
 
 	public static void exercice3(List<String> words) {
 		System.out.println("Exercice 3");
-		TreeSet<String> filteredWords = new TreeSet<>();
-		for (String word : words) {
-			if (word.length() >= 2) {
-				filteredWords.add(word);
-			}
-		}
-		for (String word : filteredWords) {
-			System.out.println(word);
-		}
+		words.stream()
+		.filter(word-> word.length()>=2)
+		.distinct()
+		.sorted()
+		.forEach(printWord);
 
-	}
+		words.stream()
+		.filter(word-> word.length()>=2)
+		.collect(Collectors.toSet())
+		.stream()
+		.sorted()
+		.forEach(printWord);
 
-	public static void exercice3bis(List<String> words) {
-		System.out.println("Exercice 3'");
-		TreeSet<String> filteredWords = new TreeSet<>(words);
-
-		for (String word : filteredWords) {
-			System.out.println(word);
-		}
 	}
 
 	public static void exercice4(List<String> words) {
 		System.out.println("Exercice 4");
-		HashMap<String, Integer> mapOfWords = new HashMap<>();
-		for (String word : words) {
-			if (word.length() >= 2) {
-				if (mapOfWords.containsKey(word)) {
-					Integer count = mapOfWords.get(word);
-					mapOfWords.put(word, ++count);
-				} else {
-					mapOfWords.put(word, 1);
-				}
-			}
-		}
-		for (Map.Entry<String, Integer> word : mapOfWords.entrySet()) {
-			System.out.printf("Le mot %s est présent %d %n", word.getKey(), word.getValue());
-		}
+		words.stream()
+		.filter(word-> word.length()>=2)
+		.collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
+		.forEach((entry, count) -> System.out.println(entry + " " + count));
+		// System.out.println(map);
+		// .entrySet().stream().forEach(entry -> System.out.println(" " entry.getKey() ));
 	}
 
 	public static void exercice5(List<String> words) {
@@ -124,35 +101,4 @@ public class Main {
 		}
 	}
 
-	public static void exercice6(List<String> words) {
-		System.out.println("Exercice 6");
-
-		HashMap<String, List<Integer>> indicesOfWords = new HashMap<>();
-		int position = 0;
-		for (String word : words) {
-			int length = word.length();
-			if (indicesOfWords.containsKey(word)) {
-				indicesOfWords.get(word).add(position);
-			} else {
-				List<Integer> indices = new ArrayList<>();
-				indices.add(position);
-				indicesOfWords.put(word, indices);
-			}
-			if (position == 0) {
-				position += length;
-			} else {
-				position += length + 1; // on ajoute l'espace
-			}
-		}
-
-		for (Map.Entry<String, List<Integer>> entry : indicesOfWords.entrySet()) {
-
-			System.out.printf("Le mot %s est présent à : ", entry.getKey());
-
-			for (Integer indice : entry.getValue()) {
-				System.out.printf(" %s ", indice);
-			}
-			System.out.println("");
-		}
-	}
 }
