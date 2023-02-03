@@ -12,17 +12,22 @@ public class VideoApi {
 
 	public static Map<User, List<Video>> videosByUser = new HashMap();
 
-	public static List<Video> listByCreator(User user) {
-		if(videosByUser.containsKey(user)){
+	public static List<Video> listByCreator(User user) throws Exception {
+		if (videosByUser.containsKey(user)) {
 			return videosByUser.get(user);
 		}
 		return new ArrayList<Video>();
 	}
 
-	public static void upload(Video video, User creator) {
-		if(!videosByUser.containsKey(creator)){
-			videosByUser.put(creator, new ArrayList());
+	public static void upload(Video video, User userLoggedIn) throws Exception {
+		if (userLoggedIn.canCreate()) {
+
+			if (!videosByUser.containsKey(userLoggedIn)) {
+				videosByUser.put(userLoggedIn, new ArrayList());
+			}
+			videosByUser.get(userLoggedIn).add(video);
+			return;
 		}
-		videosByUser.get(creator).add(video);
+		throw new Exception("Only creator can create videos");
 	}
 }

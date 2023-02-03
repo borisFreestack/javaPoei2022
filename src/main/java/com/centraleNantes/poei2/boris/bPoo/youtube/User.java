@@ -4,7 +4,9 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
-public class User {
+public abstract class User {
+
+
 	private String pseudo;
 	private LocalDate birthdate;
 	private String password;
@@ -13,15 +15,7 @@ public class User {
 
 	private List<Like> likeByUserList;
 
-	public User() {
-	}
-
-	public User(String pseudo, LocalDate birthdate, List<Video> videoCreatedList, List<Like> likeByUserList) {
-		this.pseudo = pseudo;
-		this.birthdate = birthdate;
-		this.videoCreatedList = videoCreatedList;
-		this.likeByUserList = likeByUserList;
-	}
+	public abstract boolean canCreate();
 
 	public List<Video> getVideoCreatedList() {
 		return videoCreatedList;

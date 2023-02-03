@@ -4,7 +4,7 @@ public class Cat extends Feline implements Pet {
 
     @Override
     public void beNice() {
-        // be a nice cat
+        System.out.println("ronronne");
     }
 
     public void eat() {

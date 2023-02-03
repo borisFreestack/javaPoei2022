@@ -7,9 +7,9 @@ public class Main {
 
 	public static void main(String[] args) {
 		Animal loup = new Wolf();
-		Animal chien = new Dog();
-
-
+		Dog chien = new Dog();
+		Animal putty = (Animal) chien;
+		Pet petty = (Pet) putty;
 		List<Animal> animals = new ArrayList<Animal>();
 		animals.add(chien);
 		animals.add(loup);

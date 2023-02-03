@@ -13,15 +13,19 @@ public class ChannelStartApi {
 
 	static List<Channel> channels = new ArrayList<>();
 
-	public static Channel createChannel(User owner, String channelName) {
-		Channel channel = new Channel(channelName, owner);
-		channels.add(channel);
-		return channel;
+	public static Channel createChannel(User owner, String channelName) throws Exception {
+		if (owner.canCreate()) {
+			Channel channel = new Channel(channelName, owner);
+			channels.add(channel);
+			return channel;
+		}
+		throw new Exception("Only creator can create channel");
 	}
 
-	public static List<Channel> getChannelsByName(String name) {
-		return
-		null;
+	public static List<Channel> getChannelsByName(String channelName) {
+		return channels.stream()
+		.filter(chan -> chan.getChannelName().equals(channelName))
+		.collect(Collectors.toList());
 	}
 
 	public static void upload(String channelName, Video video) {
@@ -50,10 +54,10 @@ public class ChannelStartApi {
 	public static List<Video> findRecommendations(User user) {
 		List<Video> recommendations = new ArrayList<Video>();
 		channels.stream()
-			.filter(channel -> channel.getFollowers().contains(user))
-			.forEach(channelFollowedyUser -> {
-				recommendations.addAll(channelFollowedyUser.getVideos());
-			});
+		.filter(channel -> channel.getFollowers().contains(user))
+		.forEach(channelFollowedyUser -> {
+			recommendations.addAll(channelFollowedyUser.getVideos());
+		});
 		return recommendations;
 	}
 }
