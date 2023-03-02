@@ -3,7 +3,7 @@ package com.centraleNantes.poei2.boris.designPatterns.template;
 public class Main {
 
 	public static void main(String[] args) {
-		Drawing drawing = new Drawing();
+		DrawingTemplate drawing = new AnimationA();
 		drawing.createFrame();
 	}
 }
