@@ -5,13 +5,15 @@ import java.awt.*;
 
 public abstract class DrawingTemplate extends Canvas {
 
-    public abstract Canvas getCanvas();
-
     public abstract String getFrameTitle();
+    public abstract Color getCircleColor();
+    public abstract Color getSquareColor();
+    public abstract String getTitle();
+
 
     public final void createFrame() {
         JFrame frame = new JFrame(getFrameTitle());
-        Canvas canvas = getCanvas();
+        Canvas canvas = this;
         canvas.setSize(400, 400);
         frame.add(canvas);
         frame.pack();
@@ -20,10 +22,10 @@ public abstract class DrawingTemplate extends Canvas {
 
     @Override
     public final void paint(Graphics g) {
-        g.drawString("TITRE ",150, 50);
-        g.setColor(Color.BLACK);
+        g.drawString(getTitle(),150, 50);
+        g.setColor(getCircleColor());
         g.fillOval(100, 100, 200, 200);
-        g.setColor(Color.RED);
+        g.setColor(getSquareColor());
         g.fillRect(20, 20, 50, 50);
         try {
             Thread.sleep(1000);
